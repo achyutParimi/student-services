@@ -13,10 +13,24 @@ import java.util.List;
 public class StudentController {
     @Autowired
     private StudentService studentService;
-    @GetMapping("/students/{studentId}/courses") //API Endpoint- which is mapped to the GET Request
+    @GetMapping("/students/{studentId}/courses") //API Endpoint- which is mapped to the GET Courses Request
     public List<StudentRegisteredCourse> retrieveCoursesForStudent(
             @PathVariable String studentId //@Path Variable is nothing but - the arguement passed to the api
     ) {
         return studentService.retrieveCourses(studentId);
+    }
+
+    @GetMapping("/students/{studentId}/courses/{courseId}") // API Endpoint- which is mapped to GET Courses for a student
+    public StudentRegisteredCourse retrieveStudentsCourses(
+            @PathVariable String studentId,
+            @PathVariable String courseId
+    ){
+        return studentService.retrieveStudentsCourse(studentId, courseId);
+    }
+
+    @GetMapping("/courses") // API Endpoint- which is mapped to GET Courses for a student
+    public List<Course> getAllCourses(
+    ){
+        return studentService.getAllCourses();
     }
 }

@@ -14,4 +14,15 @@ public class StudentService {
     public List<StudentRegisteredCourse> retrieveCourses(String studentId){
         return dbRepository.getCourses(studentId);
     }
+
+
+
+    public StudentRegisteredCourse retrieveStudentsCourse(String studentId, String courseId){
+        return dbRepository.getCourseDetails(studentId, courseId);
+    }
+
+
+    public List<Course> getAllCourses(){
+        return dbRepository.getAllCourses();
+    }
 }
