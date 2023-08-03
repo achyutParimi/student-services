@@ -12,4 +12,25 @@ public record Course(String id,
     public void setId(String id) {
     }
 
+    public String getId(){
+        return id;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public String getDescription(){
+        return description;
+    }
+
+    public Date getStartDate(){
+        return startDate;
+    }
+
+    public Date getEndDate(){
+        return endDate;
+    }
+
 }
+

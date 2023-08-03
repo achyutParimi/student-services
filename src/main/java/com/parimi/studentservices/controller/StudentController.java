@@ -1,12 +1,12 @@
 package com.parimi.studentservices.controller;
 
 import com.parimi.studentservices.model.Course;
+import com.parimi.studentservices.model.Student;
 import com.parimi.studentservices.model.StudentRegisteredCourse;
 import com.parimi.studentservices.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController // Controller Class -
@@ -32,5 +32,24 @@ public class StudentController {
     public List<Course> getAllCourses(
     ){
         return studentService.getAllCourses();
+    }
+    @GetMapping("/students") // API Endpoint- which is mapped to GET Courses for a student
+    public List<Student> getAllRegisteredStudents(
+    ){
+        return studentService.getAllRegisteredStudents();
+    }
+    //@GetMapping("/students/{studentId}/courses/{courseId}") // API Endpoint- which is mapped to GET Courses for a student
+    @PostMapping(path="/addCourse", consumes = "application/json")
+    public void addCourse(
+            @RequestBody Course course
+    ){
+         studentService.addCourse(course);
+    }
+
+    @PostMapping(path="/registerStudent", consumes = "application/json")
+    public void registerStudent(
+            @RequestBody Student student
+    ){
+        studentService.registerStudent(student);
     }
 }

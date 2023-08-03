@@ -59,4 +59,5 @@ public class DbConfig {
     public JdbcTemplate jdbcTemplate(@Qualifier("dataSource") final DataSource requestDataSource) {
         return new JdbcTemplate(requestDataSource);
     }
+
 }

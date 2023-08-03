@@ -1,6 +1,7 @@
 package com.parimi.studentservices.service;
 
 import com.parimi.studentservices.model.Course;
+import com.parimi.studentservices.model.Student;
 import com.parimi.studentservices.model.StudentRegisteredCourse;
 import com.parimi.studentservices.repository.DbRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,5 +25,16 @@ public class StudentService {
 
     public List<Course> getAllCourses(){
         return dbRepository.getAllCourses();
+    }
+
+    public void addCourse(Course course){
+        dbRepository.addCourse(course);
+    }
+    public void registerStudent(Student student){
+        dbRepository.registerStudent(student);
+    }
+
+    public List<Student> getAllRegisteredStudents() {
+        return dbRepository.getAllRegisteredStudents();
     }
 }

@@ -1,6 +1,7 @@
 package com.parimi.studentservices.repository;
 
 import com.parimi.studentservices.model.Course;
+import com.parimi.studentservices.model.Student;
 import com.parimi.studentservices.model.StudentRegisteredCourse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -110,5 +111,57 @@ public class DbRepository {
         List<Course> result = jdbcTemplate.query(sql, rm);
         return result;
 
+    }
+    public void addCourse(Course course){
+        String sql =
+                "insert into courses (course_name, id, description, start_date, end_date) \n" +
+                        "\t   values (:cName, :cId, :desc, :sDate, :eDate)\n";
+
+        Map<String, Object> sMap = new HashMap<>();
+        sMap.put("cName", course.getName());
+        sMap.put("cId", course.getId());
+        sMap.put("desc", course.getDescription());
+        sMap.put("sDate", course.getStartDate());
+        sMap.put("eDate", course.getEndDate());
+
+        int result = namedParameterJdbcTemplate.update(sql,sMap);
+
+    }
+
+    public void registerStudent(Student student){
+
+        String sql =
+                "insert into student (student_name, id, address, date_of_birth, enrolled_date)\n" +
+                        "\t   values (:sName, :sId, :address, :bDay, :eDate)";
+        Map<String, Object> sMap = new HashMap<>();
+        sMap.put("sName", student.getName());
+        sMap.put("sId", student.getId());
+        sMap.put("address", student.getaddress());
+        sMap.put("bDay", student.getBirthDay());
+        sMap.put("eDate", student.getStartDate());
+
+        int result = namedParameterJdbcTemplate.update(sql,sMap);
+    }
+
+    public List<Student> getAllRegisteredStudents() {
+
+        String sql =
+                "select * from student";
+        RowMapper <Student> rm = new RowMapper<Student>() {
+            @Override
+            public Student mapRow(ResultSet rs, int rowNum) throws SQLException {
+                return new Student(
+                        rs.getString("student_name"),
+                        rs.getString("id"),
+                        rs.getString("address"),
+                        rs.getDate("date_of_birth"),
+                        rs.getDate("enrolled_date")
+                );
+
+            }
+        };
+
+        List<Student> result = jdbcTemplate.query(sql,rm);
+        return result;
     }
 }
